@@ -1,0 +1,68 @@
+package kodlama.io.Devs.programmingLanguage.dataAccess.concrete;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import kodlama.io.Devs.programmingLanguage.dataAccess.abstracts.LanguageRepository;
+import kodlama.io.Devs.programmingLanguage.entities.concrete.Language;
+
+public class InMemoryLanguageRepository implements LanguageRepository{
+	
+	List<Language> languages;
+
+	public InMemoryLanguageRepository() {
+		languages = new ArrayList<Language>();
+		languages.add(new Language(1, "Java"));
+		languages.add(new Language(2, "Python"));
+		languages.add(new Language(3, "C++"));
+		languages.add(new Language(4, "Php"));
+		languages.add(new Language(5, "C#"));
+	}
+
+	@Override
+	public List<Language> getAll() {
+		// TODO Auto-generated method stub
+		return languages;
+	}
+
+	@Override
+	public void add(Language language) {
+		languages.add(language);
+		
+	}
+
+	@Override
+	public void delete(Language language) {
+		languages.remove(language.getId() - 1);
+		
+	}
+
+	@Override
+	public Language bring(int id) {
+		Language lang = null;
+		
+		for (Language language : languages) {
+			if(language.getId() == id) {
+				lang = language;
+			}
+		}
+		return lang;
+	}
+
+	@Override
+	public void update(Language language) {
+		
+		for (Language langOld : languages) {
+			if(language.getId() == langOld.getId()) {
+				langOld.setName(language.getName());
+			}
+		}
+	}
+
+	
+	
+	
+	
+	
+
+}

@@ -1,0 +1,94 @@
+package kodlama.io.Devs.programmingLanguage.business.concrete;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import kodlama.io.Devs.programmingLanguage.business.abstracts.LanguageServise;
+import kodlama.io.Devs.programmingLanguage.dataAccess.abstracts.LanguageRepository;
+import kodlama.io.Devs.programmingLanguage.entities.concrete.Language;
+
+@Service  //business nesnesi
+public class LanguageManager implements LanguageServise{
+	
+	private final LanguageRepository languageRepository;
+
+	@Autowired
+	public LanguageManager(LanguageRepository languageRepository) {
+		super();
+		this.languageRepository = languageRepository;
+	}
+
+	@Override
+	public List<Language> getAll() {
+		// TODO Auto-generated method stub
+		return languageRepository.getAll();
+	}
+
+	@Override
+	public void add(Language language) throws Exception {
+		if(isIdExist(language.getId())) {
+			throw new Exception("Bu ID daha önce kullanılmış");
+		}
+		if(isNameValid(language.getName())) {
+			languageRepository.add(language);
+		}
+	}
+
+	@Override
+	public void delete(int id) throws Exception {
+		
+		
+	}
+
+	@Override
+	public Language bring(int id) {
+		// TODO Auto-generated method stub
+		return languageRepository.bring(id);
+	}
+
+	@Override
+	public void update(int id,Language language) throws Exception {
+		
+		for(Language eskiLang : languageRepository.getAll()) {
+			
+			if(eskiLang.getId() == language.getId()) {
+				if(eskiLang.getName().equals(language.getName())) {
+					throw new Exception("Böyle bir programlama dili zaten var!");
+				}
+				else {
+					languageRepository.update(language);
+				}
+			}
+		}
+		
+	}
+	
+	
+	private boolean isIdExist(int id) {
+		
+		for (Language language : getAll()) {
+			
+			if(language.getId() == id) {
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	private boolean isNameValid(String name) throws Exception {
+		if(name.isBlank()) {
+			throw new Exception("İsim alanı boş olamaz");
+		}
+		for(Language language : getAll()) {
+			if(language.getName().equals(name)) {
+				throw new Exception("İsim tekrar edemez");
+			}
+		}
+		return true;
+		
+	}
+	
+	
+}

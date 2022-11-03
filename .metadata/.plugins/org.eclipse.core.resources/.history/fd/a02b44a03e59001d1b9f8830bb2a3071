@@ -1,0 +1,37 @@
+package kodlama.io.Devs.programmingLanguage.webApi.controllers;
+
+import java.util.List;
+
+import kodlama.io.Devs.programmingLanguage.business.abstracts.LanguageServise;
+import kodlama.io.Devs.programmingLanguage.entities.concrete.Language;
+
+public class LanguageController {
+	
+	private LanguageServise languageServise;
+
+	public LanguageController(LanguageServise languageServise) {
+		super();
+		this.languageServise = languageServise;
+	}
+	
+	List<Language> getAll(){
+		return languageServise.getAll();
+	}
+	
+	void add(Language language) throws Exception {
+		languageServise.add(language);
+	}
+	
+	void delete(Language language) throws Exception {
+		languageServise.delete(language);
+	}
+	
+	void update(Language language) throws Exception {
+		languageServise.update(language);
+	}
+	
+	Language bring(int id) {
+		return languageServise.bring(id);
+	}
+
+}

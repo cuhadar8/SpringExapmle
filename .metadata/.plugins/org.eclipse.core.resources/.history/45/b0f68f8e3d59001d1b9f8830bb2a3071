@@ -1,0 +1,5 @@
+package kodlama.io.Devs.programmingLanguage.webApi.controllers;
+
+public class LanguageController {
+
+}

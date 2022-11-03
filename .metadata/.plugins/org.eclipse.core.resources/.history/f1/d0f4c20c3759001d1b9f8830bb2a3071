@@ -1,0 +1,53 @@
+package kodlama.io.Devs.programmingLanguage.business.concrete;
+
+import java.util.List;
+
+import kodlama.io.Devs.programmingLanguage.business.abstracts.LanguageServise;
+import kodlama.io.Devs.programmingLanguage.dataAccess.abstracts.LanguageRepository;
+import kodlama.io.Devs.programmingLanguage.entities.concrete.Language;
+
+public class LanguageManager implements LanguageServise{
+	
+	private LanguageRepository languageRepository;
+
+	public LanguageManager(LanguageRepository languageRepository) {
+		super();
+		this.languageRepository = languageRepository;
+	}
+
+	@Override
+	public List<Language> getAll() {
+		// TODO Auto-generated method stub
+		return languageRepository.getAll();
+	}
+
+	@Override
+	public void add(Language language) throws Exception {
+		if(language.getName() == null || language.getName().split(" ").length == 0) {
+			throw new Exception("İsim boş bırakılamaz");
+		}
+		else {
+			
+		}
+	}
+
+	@Override
+	public void delete(Language language) {
+		languageRepository.delete(language);
+		
+	}
+
+	@Override
+	public Language bring(int id) {
+		// TODO Auto-generated method stub
+		return languageRepository.bring(id);
+	}
+
+	@Override
+	public void update(Language language) {
+		languageRepository.delete(language);
+		
+	}
+	
+	
+}

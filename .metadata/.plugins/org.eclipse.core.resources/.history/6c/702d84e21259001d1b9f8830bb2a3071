@@ -1,0 +1,5 @@
+package kodlama.io.Devs.programmingLanguage.entities.concrete;
+
+public class Language {
+
+}
